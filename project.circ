@@ -170,7 +170,7 @@
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(1470,3860)" name="Constant">
-      <a name="value" val="0xff"/>
+      <a name="value" val="0x0"/>
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(1470,560)" name="Constant">
@@ -704,7 +704,7 @@
       <a name="addrWidth" val="16"/>
       <a name="appearance" val="logisim_evolution"/>
       <a name="contents">addr/data: 16 8
-1 1 14 5*2 88*1
+1 1 14 42 4*2 88*1
 </a>
       <a name="label" val="prog"/>
       <a name="labelvisible" val="true"/>
@@ -726,6 +726,7 @@
     </comp>
     <comp lib="4" loc="(980,970)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="REG_CARRY"/>
       <a name="showInTab" val="true"/>
       <a name="width" val="1"/>
     </comp>
@@ -760,10 +761,10 @@
       <a name="label" val="ADD"/>
     </comp>
     <comp lib="5" loc="(1480,2800)" name="LED">
-      <a name="label" val="PC_OP"/>
+      <a name="label" val="GET_PC"/>
     </comp>
     <comp lib="5" loc="(1480,3000)" name="LED">
-      <a name="label" val="CARRY"/>
+      <a name="label" val="GET_CARRY"/>
     </comp>
     <comp lib="5" loc="(1480,3180)" name="LED">
       <a name="label" val="JUMP"/>
