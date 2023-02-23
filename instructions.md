@@ -31,7 +31,6 @@
 | ❌ | `0x80` | COPYAB | `[A:data]` | `[A:data, B:data]` | Copy register `A` to register `B` |
 | ❌ | `0x81` | COPYAC | `[A:data]` | `[A:data, C:data]` | Copy register `A` to register `C` |
 | ❌ | `0x81` | COPYBC | `[B:data]` | `[B:data, C:data]` | Copy register `B` to register `C` |
-| ❌ | `0x82` | SWAPBC | `[B:data1, C:data2]` | `[B:data2, C:data1]` | Swap registers `B` and `C` |
 | ❌ | `0x90` | MSET | `[A:data, B:dest[0:8], C:dest[8:16]]` | `[]` | Write to the memory `data` at position `dest`. |
 | ❌ | `0x91` | MLOAD | `[B:dest[0:8], C:dest[8:16]]` | `[A:data]` | Read the memory at position `dest` |
 | ❌ | `0x92` | MCOPY | `[B:dest[0:8], C:dest[8:16]]` | `[A:mem.get(dest)]` | Copy 1 byte of memory at `dest` into the register `A`. |
