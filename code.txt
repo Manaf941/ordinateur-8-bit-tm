@@ -1,8 +1,9 @@
 label start
-LDA 01
-ADD
-ADD
-JUMPI e
-JUMP start
+LDA 20
+jump add
 
-label e
+label add
+LDB 01
+ADD
+JUMPI start
+JUMP add

@@ -155,6 +155,9 @@ const walk = (labelname) => {
     for(const instruction of labels.get(labelname)){
         switch(instruction.type){
             case "jump": {
+                if(!labelset.has(instruction.name)){
+                    throw new Error(`${filename}:${instruction.line_number} Unknown label: ${JSON.stringify(instruction.name)}`)
+                }
                 walk(instruction.name)
             }
         }

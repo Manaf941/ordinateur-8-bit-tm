@@ -22,9 +22,9 @@
 | ✅ | `0x42` | JUMPZ | `[A:condition, B:dest[0:8], C:dest[8:16]]` | `[]` | Jumps to `dest` if `condition` is equal to `0x00` |
 | ❌ | `0x50` | RI | `[B:port]` | `[A:data]` | Read from the I/O port `port` |
 | ❌ | `0x51` | WI | `[A:data, B:port]` | `[]` | Write byte `data` to the I/O port `port` |
-| ❌ | `0x60` | LDA | `[]` | `[A:data]` | Set register `A` to the next byte of the rom; next op will be interpreted as `NOP` |
-| ❌ | `0x61` | LDB | `[]` | `[B:data]` | Set register `B` to the next byte of the rom; next op will be interpreted as `NOP` |
-| ❌ | `0x62` | LDC | `[]` | `[C:data]` | Set register `C` to the next byte of the rom; next op will be interpreted as `NOP` |
+| ✅ | `0x60` | LDA | `[]` | `[A:data]` | Set register `A` to the next byte of the rom; next op will be interpreted as `NOP` |
+| ✅ | `0x61` | LDB | `[]` | `[B:data]` | Set register `B` to the next byte of the rom; next op will be interpreted as `NOP` |
+| ✅ | `0x62` | LDC | `[]` | `[C:data]` | Set register `C` to the next byte of the rom; next op will be interpreted as `NOP` |
 | ❌ | `0x70` | SWAPAB | `[A:data1, B:data2]` | `[A:data2, B:data1]` | Swap registers `A` and `B` |
 | ❌ | `0x71` | SWAPAC | `[A:data1, C:data2]` | `[A:data2, C:data1]` | Swap registers `A` and `C` |
 | ❌ | `0x72` | SWAPBC | `[B:data1, C:data2]` | `[B:data2, C:data1]` | Swap registers `B` and `C` |
@@ -38,30 +38,26 @@
 # REGISTERS
 ## A
 Primary data storage slot
-## B
+
+## B
 Secondary data storage slot, also used for the 8 most significant bits of an address
+
 ## C
 Used for the 8 least significant bits of an address.
-## Flags
+
+## Flags
 Used for flags, here is a representation of the register structure:
-| Bit | Name | Usage | Related Instructions |  |  |
-|---|---|---|---|---|---|
-| 0 | Carry | Set by an arithmetic operation, tells if the last operation had an overflow or underflow. Can be retrieved using the `CARRY` instruction | `ADD`, `SUB`, `CARRY` |  |  |
-| 1-2 | Register | These two bits are used by the `LDA`, `LDB` and `LDC` instructions. When these bits are not equal to 0, the next byte in the rom will be interpreted as a register byte (to load) instead of as an instruction. The bits are interpreted as a binary number, indicating which register the data should be copied to, 1 being reg A, 3 being reg C | `LDA`, `LDB`, `LDC` |  |  |
-|  |  |  |  |  |  |
-|  |  |  |  |  |  |
+| Bit | Name | Usage | Related Instructions |
+|---|---|---|---|
+| 0 | Carry | Set by an arithmetic operation, tells if the last operation had an overflow or underflow. Can be retrieved using the `CARRY` instruction | `ADD`, `SUB`, `CARRY` |
+| 1 | Skip Increment | This bit is used by the `JUMP`, `JUMPI` and `JUMPZ` instructions. When this bit is 1, the counter will not increment for the next instruction. This is only used in the context of jumps, when the jump occurs before the increment. Setting this bit stops the next increment. | `JUMP`, `JUMPI`, `JUMPZ` |
 
 # Ticks
 | Tick | Name | Usage |
 |---|---|---|
-| 0 | Fetch | Nothing should actually run on this tick, it should be used to load the instruction only |
-| 1 | Execute | The instruction should execute here |
+| 0 | Fetch | Nothing should actually run on this tick, it is used to load the instruction from the rom |
+| 1 | Fetch | This tick sets the content of the rom (the instruction) to a separate register |
 | 2 | Execute | The instruction should execute here |
-| 3 | Cleanup |  |
+| 3 | Execute | The instruction should execute here |
 # MEMORY
 > currently in progress
-
-00	unlock	10	lock
-01	unlock	11	lock
-02	unlock	12	lock
-03	locking	13	unlock
