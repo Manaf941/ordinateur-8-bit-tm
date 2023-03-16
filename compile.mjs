@@ -25,11 +25,24 @@ const instructions = {
     JUMPI: 0x41,
     JUMPZ: 0X42,
 
-
+    RI: 0x50,
+    WI: 0x50,
 
     LDA: 0x60,
     LDB: 0x61,
-    LDC: 0x62
+    LDC: 0x62,
+
+    SWAPAB: 0x70,
+    SWAPAC: 0x71,
+    SWAPBC: 0x72,
+
+    COPYAB: 0x80,
+    COPYAC: 0x81,
+    COPYBC: 0x82,
+
+    MSET: 0x90,
+    MLOAD: 0x91,
+    MCOPY: 0x92
 }
 
 const OUTPUT_LEN = 2**16 // 64kb
