@@ -35,5 +35,33 @@
 | ❌ | `0x91` | MLOAD | `[B:dest[0:8], C:dest[8:16]]` | `[A:data]` | Read the memory at position `dest` |
 | ❌ | `0x92` | MCOPY | `[B:dest[0:8], C:dest[8:16]]` | `[A:mem.get(dest)]` | Copy 1 byte of memory at `dest` into the register `A`. |
 
+# REGISTERS
+## A
+Primary data storage slot
+## B
+Secondary data storage slot, also used for the 8 most significant bits of an address
+## C
+Used for the 8 least significant bits of an address.
+## Flags
+Used for flags, here is a representation of the register structure:
+| Bit | Name | Usage | Related Instructions |  |  |
+|---|---|---|---|---|---|
+| 0 | Carry | Set by an arithmetic operation, tells if the last operation had an overflow or underflow. Can be retrieved using the `CARRY` instruction | `ADD`, `SUB`, `CARRY` |  |  |
+| 1-2 | Register | These two bits are used by the `LDA`, `LDB` and `LDC` instructions. When these bits are not equal to 0, the next byte in the rom will be interpreted as a register byte (to load) instead of as an instruction. The bits are interpreted as a binary number, indicating which register the data should be copied to, 1 being reg A, 3 being reg C | `LDA`, `LDB`, `LDC` |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+# Ticks
+| Tick | Name | Usage |
+|---|---|---|
+| 0 | Fetch | Nothing should actually run on this tick, it should be used to load the instruction only |
+| 1 | Execute | The instruction should execute here |
+| 2 | Execute | The instruction should execute here |
+| 3 | Cleanup |  |
 # MEMORY
 > currently in progress
+
+00	unlock	10	lock
+01	unlock	11	lock
+02	unlock	12	lock
+03	locking	13	unlock

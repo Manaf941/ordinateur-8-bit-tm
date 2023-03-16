@@ -1,0 +1,8 @@
+label start
+LDA 01
+ADD
+ADD
+JUMPI e
+JUMP start
+
+label e
