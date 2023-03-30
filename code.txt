@@ -1,9 +1,0 @@
-label start
-LDA 20
-jump add
-
-label add
-LDB 01
-ADD
-JUMPI start
-JUMP add
