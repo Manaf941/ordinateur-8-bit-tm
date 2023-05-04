@@ -1,39 +1,33 @@
+```md
+# Instruction structure
+0 0 0 0 0 _ dst0 dst1 dst2
+0 0 _ lsrc0 lsrc1 lsrc2 _ rsrc0 rsrc1 rsrc2
+```
 # INSTRUCTIONS
 | IMPLEMENTATION | CODE | OP | Inputs (Registers) | Outputs (Registers) | Description |
 |---|---|---|---|---|---|
-| ✅ | `0x00` | NOP | `[]` | `[]` | No Operation |
-| ✅ | `0x01` | ADD | `[A, B]` | `[A:((A + B) % 256)]` | Performs an addition on `A` and `B`, returns `A + B` |
-| ✅ | `0x02` | SUB | `[A, B]` | `[A:((A - B) % 256)]` | Performs a substraction of `A` by `B`, returns `A - B` |
-| ❌ | `0x03` | MUL | `[A, B]` | `[A:((A * B) % 256)]` | Performs a multiplication on `A` and `B`, returns `A * B` |
-| ❌ | `0x04` | DIV | `[A, B]` | `[A:(A / B)]` | Performs a division on `A` by `B`, returns `A / B` |
-| ✅ | `0x10` | LTEQ | `[A, B]` | `[A:(A <= B)]` | Returns `0xFF` if `A` is less than or equal to `B`, `0` otherwise `0x00` |
-| ✅ | `0x11` | GTEQ | `[A, B]` | `[A:(A >= B)]` | Returns `0xFF` if `A` is greater than or equal to `B`, `0` otherwise `0x00` |
-| ✅ | `0x12` | LT | `[A, B]` | `[A:(A < B)]` | Returns `0xFF` if `A` is greater than `B`, `0` otherwise `0x00` |
-| ✅ | `0x13` | GT | `[A, B]` | `[A:(A > B)]` | Returns `0xFF` if `A` is less than `B`, `0` otherwise `0x00` |
-| ✅ | `0x14` | EQ | `[A, B]` | `[A:(A == B)]` | Returns `0xFF` if `A` is equal to `B`, `0` otherwise `0x00` |
-| ✅ | `0x20` | AND | `[A, B]` | `[A:(A & B)]` | bitwise AND operation |
-| ✅ | `0x21` | OR | `[A, B]` | `[A:(A \| B)]` | bitwise OR operation |
-| ✅ | `0x22` | XOR | `[A, B]` | `[A:(A ^ B)]` | bitwise XOR operation,  |
-| ✅ | `0x23` | NOT | `[A]` | `[A:(~A)]` | bitwise NOT operation |
-| ✅ | `0x30` | PC | `[]` | `[C:pc[0:8], D:pc[8:16]]` | Returns the positional counter |
-| ✅ | `0x31` | CARRY | `[]` | `[A:carry]` | Returns `0xFF` if the last arithmetic operation had a carry, otherwise `0x00` |
-| ✅ | `0x40` | JUMP | `[C:dest[0:8], D:dest[8:16]]` | `[]` | Jumps to `dest` |
-| ✅ | `0x41` | JUMPI | `[A:condition, C:dest[0:8], D:dest[8:16]]` | `[]` | Jumps to `dest` if `condition` is equal to `0xFF` |
-| ✅ | `0x42` | JUMPZ | `[A:condition, C:dest[0:8], D:dest[8:16]]` | `[]` | Jumps to `dest` if `condition` is equal to `0x00` |
-| ❌ | `0x50` | RI | `[B:port]` | `[A:data]` | Read from the I/O port `port` |
-| ❌ | `0x51` | WI | `[A:data, B:port]` | `[]` | Write byte `data` to the I/O port `port` |
-| ✅ | `0x60` | LDA | `[]` | `[A:data]` | Set register `A` to the next byte of the rom; |
-| ✅ | `0x61` | LDB | `[]` | `[B:data]` | Set register `B` to the next byte of the rom; |
-| ✅ | `0x62` | LDC | `[]` | `[C:data]` | Set register `C` to the next byte of the rom; |
-| ✅ | `0x63` | LDD | `[]` | `[C:data]` | Set register `D` to the next byte of the rom; |
-| ❌ | `0x70` | SWAPAB | `[A:data1, B:data2]` | `[A:data2, B:data1]` | Swap registers `A` and `B` |
-| ❌ | `0x71` | SWAPAC | `[A:data1, C:data2]` | `[A:data2, C:data1]` | Swap registers `A` and `C` |
-| ❌ | `0x72` | SWAPBC | `[B:data1, C:data2]` | `[B:data2, C:data1]` | Swap registers `B` and `C` |
-| ❌ | `0x80` | COPYAB | `[A:data]` | `[A:data, B:data]` | Copy register `A` to register `B` |
-| ❌ | `0x81` | COPYAC | `[A:data]` | `[A:data, C:data]` | Copy register `A` to register `C` |
-| ❌ | `0x82` | COPYBC | `[B:data]` | `[B:data, C:data]` | Copy register `B` to register `C` |
-| ✅ | `0x90` | MSET | `[A:data, C:dest[0:8], D:dest[8:16]]` | `[]` | Write to the memory `data` at position `dest`. |
-| ✅ | `0x91` | MLOAD | `[C:dest[0:8], D:dest[8:16]]` | `[A:data]` | Read the memory at position `dest` |
+| ✅ | `0b0000_0000` | NOP | `[]` | `[]` | No Operation |
+| ✅ | `0b1000_0xxx` | ADD | `[A, B]` | `[A:((A + B) % 256)]` | Performs an addition on `A` and `B`, returns `A + B` |
+| ✅ | `0b1000_1xxx` | SUB | `[A, B]` | `[A:((A - B) % 256)]` | Performs a substraction of `A` by `B`, returns `A - B` |
+| ✅ | `0b1001_0xxx` | LTEQ | `[A, B]` | `[A:(A <= B)]` | Returns `0xFF` if `A` is less than or equal to `B`, `0` otherwise `0x00` |
+| ✅ | `0b1001_1xxx` | GTEQ | `[A, B]` | `[A:(A >= B)]` | Returns `0xFF` if `A` is greater than or equal to `B`, `0` otherwise `0x00` |
+| ✅ | `0b1010_0xxx` | LT | `[A, B]` | `[A:(A < B)]` | Returns `0xFF` if `A` is greater than `B`, `0` otherwise `0x00` |
+| ✅ | `0b1010_1xxx` | GT | `[A, B]` | `[A:(A > B)]` | Returns `0xFF` if `A` is less than `B`, `0` otherwise `0x00` |
+| ✅ | `0b1011_0xxx` | EQ | `[A, B]` | `[A:(A == B)]` | Returns `0xFF` if `A` is equal to `B`, `0` otherwise `0x00` |
+| ✅ | `0b1011_1xxx` | AND | `[A, B]` | `[A:(A & B)]` | bitwise AND operation |
+| ✅ | `0b1100_0xxx` | OR | `[A, B]` | `[A:(A \| B)]` | bitwise OR operation |
+| ✅ | `0b1100_1xxx` | XOR | `[A, B]` | `[A:(A ^ B)]` | bitwise XOR operation,  |
+| ✅ | `0b1101_0xxx` | NOT | `[A]` | `[A:(~A)]` | bitwise NOT operation |
+| ✅ | `0b1101_1xxx` | LDX | `[]` | `[A:data]` | Set register `A` to the next byte of the rom; |
+| ❌ | `0b1110_0xxx` | RI | `[B:port]` | `[A:data]` | Read from the I/O port `port` |
+| ✅ | `0b1110_1xxx` | CARRY | `[]` | `[A:carry]` | Returns `0xFF` if the last arithmetic operation had a carry, otherwise `0x00` |
+| ❌ | `0x00` | WI | `[A:data, B:port]` | `[]` | Write byte `data` to the I/O port `port` |
+| ✅ | `0b0001_0xxx` | PC | `[]` | `[C:pc[0:8], D:pc[8:16]]` | Returns the positional counter |
+| ✅ | `0b0010_0xxx` | JUMP | `[C:dest[0:8], D:dest[8:16]]` | `[]` | Jumps to `dest` |
+| ✅ | `0b0010_1xxx` | JUMPI | `[A:condition, C:dest[0:8], D:dest[8:16]]` | `[]` | Jumps to `dest` if `condition` is equal to `0xFF` |
+| ✅ | `0b0011_0xxx` | JUMPZ | `[A:condition, C:dest[0:8], D:dest[8:16]]` | `[]` | Jumps to `dest` if `condition` is equal to `0x00` |
+| ✅ | `0b0100_0xxx` | MSET | `[A:data, C:dest[0:8], D:dest[8:16]]` | `[]` | Write to the memory `data` at position `dest`. |
+| ✅ | `0b0100_1xxx` | MLOAD | `[C:dest[0:8], D:dest[8:16]]` | `[A:data]` | Read the memory at position `dest` |
 
 # REGISTERS
 ## A
