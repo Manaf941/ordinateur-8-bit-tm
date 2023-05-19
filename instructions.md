@@ -42,18 +42,17 @@ Program counter, points to the current instruction being executed. The PC regist
 Used for flags, here is a representation of the register structure:
 | Bit | Name | Usage | Related Instructions |
 |---|---|---|---|
-| 0 | Carry | Set by an arithmetic operation, tells if the last operation had an overflow or underflow. Can be retrieved using the `CARRY` instruction | `ADD`, `SUB`, `CARRY` |
+| 0 | Carry | Set by an arithmetic operation, tells if the last operation had an overflow or underflow. Can be retrieved using the `CARRY` instruction | `ADD`, `SUB`, `CARRY`, `JUMPC` |
 
 # Ticks
-Instructions run on 6 ticks, here is a representation of the tick structure:
+Instructions run on 5 ticks, here is a representation of the tick structure:
 | Tick | Name | Usage |
 |---|---|---|
 | 0 | Fetch | Nothing should actually run on this tick, it is used to load the instruction from the rom |
 | 1 | Fetch | This tick sets the content of the rom (the instruction) to a separate register |
 | 2 | Execute | The instruction should execute here |
 | 3 | Execute | The instruction should execute here |
-| 4 | Execute | The instruction should execute here |
-| 5 | Execute | The instruction should execute here |
+| 4 | Rest | This tick is used by the tick counter to reset to tick 0 |
 
 # MEMORY
 No special layout for now. If I develop a higher level programming language for this computer, I might add a more structured layout.
