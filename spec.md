@@ -1,6 +1,6 @@
 # Instruction structure
 ```md
-0 0 0 0 0 _ dst0 dst1 dst2
+x x x x x _ dst0 dst1 dst2
 0 0 _ lsrc0 lsrc1 lsrc2 _ rsrc0 rsrc1 rsrc2
 ```
 # INSTRUCTIONS
@@ -52,7 +52,6 @@ Instructions run on 5 ticks, here is a representation of the tick structure:
 | 1 | Fetch | This tick sets the content of the rom (the instruction) to a separate register |
 | 2 | Execute | The instruction should execute here |
 | 3 | Execute | The instruction should execute here |
-| 4 | Rest | This tick is used by the tick counter to reset to tick 0 |
 
 # MEMORY
 No special layout for now. If I develop a higher level programming language for this computer, I might add a more structured layout.
