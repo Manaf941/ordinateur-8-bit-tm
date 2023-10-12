@@ -1,0 +1,27 @@
+{
+  "name": "silver-lamp",
+  "version": "1.0.0",
+  "description": "A template for me, instead of having to create a new project from scratch each time",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "scripts/run-tests.sh",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "build:examples": "scripts/build-examples.sh"
+  },
+  "author": "Manaf941",
+  "license": "UNLICENSED",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^18.16.13",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "eslint": "^8.11.0",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "modernlog": "^1.1.0"
+  }
+}

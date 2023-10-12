@@ -1,0 +1,5 @@
+node_modules
+dist
+*.slb
+*.slb.hex
+.DS_Store
