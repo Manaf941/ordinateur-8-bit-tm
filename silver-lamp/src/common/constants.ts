@@ -1,4 +1,4 @@
-export const MAX_CODE_SIZE = 0xffff
+export const MAX_CODE_SIZE = 2**16
 
 export enum Registers {
     A = "A",
