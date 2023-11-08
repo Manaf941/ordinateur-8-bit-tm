@@ -81,16 +81,15 @@ export default class Runtime extends EventEmitter<{
 
         const opcode = this.getByte()
 
-        const instruction = instructions.get(opcode & 0b11111_000)
-        if(!instruction){
+        let instruction = instructions.get(opcode & 0b11111_000)
+        if(instruction){
+            if(this.options.debug)console.info(`Executing ${instruction.name} at ${formatHex(this.pc, 4)}`)
+    
+            instruction.execute?.(this, opcode)
+        }else{
             if(this.options.debug)console.warn(`Invalid opcode ${opcode}; Acting as NOP, at ${formatHex(this.pc, 4)}`)
-            this.incrementPC()
-            this.emit("afterPc")
-            return NOP
+            instruction = NOP
         }
-        if(this.options.debug)console.info(`Executing ${instruction.name} at ${formatHex(this.pc, 4)}`)
-
-        instruction.execute?.(this, opcode)
 
         this.incrementPC()
         this.emit("afterPc")

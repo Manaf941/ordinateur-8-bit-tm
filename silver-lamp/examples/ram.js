@@ -1,6 +1,7 @@
 import "modernlog/patch.js"
 import { readFile } from "fs/promises"
 import Runtime from "../dist/emulator/Runtime.js"
+import { formatHex } from "../dist/common/utils.js"
 import assert from "assert"
 
 const code = await readFile(new URL("./ram.slb", import.meta.url))
@@ -20,5 +21,11 @@ assert(a.data === b.data, `Expected a == b, but got a == ${a.data} and b == ${b.
 
 await runtime.run()
 const address = h.data*256 + l.data
-assert(ram.read(address) === a.data, `Expected ram[0x${address.toString(16).padStart(4, "0")}] == a, but got ram[0x${address.toString(16).padStart(4, "0")}] == ${ram.read(address)} and a == ${a.data}`)
+assert(
+    ram.read(address) === a.data,
+    `Expected ram[${
+        formatHex(address, 4)
+    }] == a, but got ram[${
+        formatHex(address, 4)
+    }] == ${ram.read(address)} and a == ${a.data}`)
 

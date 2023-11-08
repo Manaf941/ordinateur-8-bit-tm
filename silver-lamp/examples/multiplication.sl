@@ -1,11 +1,15 @@
-c = 5
-d = 3
+a = 5
+b = 3
 
-# while d != 0                                                                      
+# copy original data to avoid modifying b
+d = b
+
+# while d != 0
 tag loop
-jumpz d loop
+jumpz d end
 
-a = a + c
+# c += a
+c = c + a
 
 # d--
 e = 1
@@ -13,4 +17,5 @@ d = d-e
 jump loop
 
 tag end
-# a == 15
+# this basically makes c = a + a + a
+# c == 15
