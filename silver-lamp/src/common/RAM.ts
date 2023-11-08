@@ -6,7 +6,10 @@ export default class RAM {
     }
     
     debug
-    private data = Buffer.alloc(2**(64/8))
+    private data = Buffer.alloc(2**16)
+    reset(){
+        this.data.fill(0)
+    }
     read(address:number){
         address &= 0xffff
         if(this.debug)console.debug(`RAM read at ${formatHex(address, 4)} as ${formatHex(this.data[address])}`)

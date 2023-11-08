@@ -55,7 +55,6 @@ export default class Runtime extends EventEmitter<{
     }
 
     pc = 0
-    memory = Buffer.alloc(0xffff)
     code: Buffer
 
     incrementPC(){
@@ -70,7 +69,7 @@ export default class Runtime extends EventEmitter<{
 
     reset() {
         this.pc = 0
-        this.memory.fill(0)
+        this.ram.reset()
         for(const register of this.registers){
             register.data = 0
         }
