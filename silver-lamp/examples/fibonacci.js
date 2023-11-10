@@ -10,7 +10,7 @@ import Runtime from "../dist/emulator/Runtime.js"
 
 const code = await readFile(new URL("./fibonacci.slb", import.meta.url))
 const runtime = new Runtime(code, {
-    debug: true
+    debug: false
 })
 
 const timeout = setTimeout(() => {

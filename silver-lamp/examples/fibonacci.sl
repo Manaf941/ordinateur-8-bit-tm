@@ -1,8 +1,7 @@
 # 12 is the max before overflow
 f = 12 # terms
 
-# default value, saves 2 instruction by omitting it
-# a = 0 #n1
+a = 0 #n1
 b = 1 #n2
 
 tag loop
@@ -23,4 +22,3 @@ f = f-d
 jump loop
 
 tag end
-jump end
